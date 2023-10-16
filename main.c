@@ -68,17 +68,23 @@ bool isAccepted(FiniteAutomaton *fa, const char *w0) {
 
 int main() {
     FiniteAutomaton fa;
-    if (!readAutomaton("C:\\Users\\ks\\CLionProjects\\sysprog_lab2\\data.txt", &fa)) {
+    if (!readAutomaton("data.txt", &fa)) {
         printf("Error reading the automaton\n");
         return 1;
     }
     char w0[100];
     printf("Enter word w0: ");
     scanf("%s", w0);
-    if (isAccepted(&fa, w0)) {
-        printf("The automaton accepts the word of the w = w1w0.\n");
+
+    char w1[] = "b";
+    char w[200];
+    snprintf(w, sizeof(w), "%s%s", w1, w0);
+
+    if (isAccepted(&fa, w)) {
+        printf("The automaton accepts the word w = %s (w1w0).\n", w);
     } else {
-        printf("The automaton does not accept the word of the w = w1w0.\n");
+        printf("The automaton does not accept the word w = %s (w1w0).\n", w);
     }
+
     return 0;
 }
